@@ -1,6 +1,10 @@
 # Technical Test Frontend Hara Anargya
 
 ## Installation
+* Nama : Ma'sum Abdul Matin
+* Email : masum.abdulm@gmail.com
+
+## Installation
 * Fork Repo ini
 * Clone Repo ini
 * `npm i`
