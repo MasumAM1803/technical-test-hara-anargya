@@ -5,8 +5,10 @@ import cities from '../assets/js/city';
 
 const listCity = ref([]);
 const listProvinceName = ref([]);
+const sortedListProvince = ref([]);
 const tabPaneListCity = ref(true);
 const tabPaneProvince = ref(false);
+const tabPaneSortingProvince = ref(false);
 
 function getListCity(idProvince) {
     listCity.value = cities.filter(city => city.provinsi_id == idProvince.target.value)
@@ -36,16 +38,29 @@ function showPane(id) {
         case 1:
             tabPaneListCity.value = true
             tabPaneProvince.value = false
+            tabPaneSortingProvince.value = false
             break;
         case 2:
             tabPaneListCity.value = false
             tabPaneProvince.value = true
+            tabPaneSortingProvince.value = false
+            break;
+        case 3:
+            tabPaneListCity.value = false
+            tabPaneProvince.value = false
+            tabPaneSortingProvince.value = true
+            sortingListProvince();
             break;
         default:
             tabPaneListCity.value = true
             tabPaneProvince.value = false
+            tabPaneSortingProvince.value = false
             break;
     }
+}
+
+function sortingListProvince() {
+    sortedListProvince.value = provinces.sort((a, b) => (a.id - b.id)).sort((a, b) => (a.name - b.name));
 }
 
 </script>
@@ -54,10 +69,13 @@ function showPane(id) {
     <div class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700 mb-8">
         <ul class="flex flex-wrap -mb-px">
             <li class="me-2">
-                <a @click="showPane(1)" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Search List City by ID Province</a>
+                <a @click="showPane(1)" class="cursor-pointer inline-block p-4 border-b-2 border-transparent rounded-t-lg text-black hover:text-gray-600 hover:border-gray-300">Search List City by ID Province</a>
             </li>
             <li class="me-2">
-                <a @click="showPane(2)" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" aria-current="page">Search Province Name by ID City</a>
+                <a @click="showPane(2)" class="cursor-pointer inline-block p-4 border-b-2 border-transparent rounded-t-lg text-black hover:text-gray-600 hover:border-gray-300" aria-current="page">Search Province Name by ID City</a>
+            </li>
+            <li class="me-2">
+                <a @click="showPane(3)" class="cursor-pointer inline-block p-4 border-b-2 border-transparent rounded-t-lg text-black hover:text-gray-600 hover:border-gray-300" aria-current="page">Sorting List Province</a>
             </li>
         </ul>
     </div>
@@ -115,6 +133,26 @@ function showPane(id) {
             </thead>
             <tbody class="bg-[#FFF] text-center">
                 <tr v-for="(item, index) in listProvinceName" :key=index class="text-[#686868]">
+                    <td class="px-4 py-4">{{ item.id }}</td>
+                    <td class="px-4 py-4">{{ item.name }}</td>
+                    <td class="px-4 py-4">{{ item.wilayah_id }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div v-show="tabPaneSortingProvince" class="text-black">
+        <h2 class="mb-6 font-extrabold text-3xl">List Province</h2>
+        <table v-if="sortedListProvince.length !== 0" class="w-full text-sm text-gray-500 dark:text-gray-400 mt-6">
+            <thead class="text-gray-700 bg-[#fafbfc]">
+                <tr>
+                    <th class="p-4">ID</th>
+                    <th class="p-4">Name</th>
+                    <th class="p-4">Wilayah ID</th>
+                </tr>
+            </thead>
+            <tbody class="bg-[#FFF] text-center">
+                <tr v-for="(item, index) in sortedListProvince" :key=index class="text-[#686868]">
                     <td class="px-4 py-4">{{ item.id }}</td>
                     <td class="px-4 py-4">{{ item.name }}</td>
                     <td class="px-4 py-4">{{ item.wilayah_id }}</td>
