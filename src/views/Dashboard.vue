@@ -52,34 +52,34 @@ function formattedDate(date) {
 </script>
 
 <template>
-    <Modal
-        v-show="isModalVisible"
-        @close="closeModal"
-        v-for="(item, index) in dataModal" :key=index
-        >
-        <template v-slot:body>
-            <div class="flex flex-col gap-3">
-                <div class="flex items-center gap-8">
-                    <img :src=item.profile_picture :alt=item.first_name class="w-[150px] h-[150px] rounded-full">
-                    <div>
-                        <p>{{ item.first_name }} {{ item.last_name }}</p>
-                        <p>{{ item.email }}</p>
-                        <p>{{ item.phone }}</p>
-                    </div>
-                </div>
-                <div>
-                    <p><span class="font-bold">Gender: </span> {{ item.gender }}</p>
-                    <p><span class="font-bold">Job: </span> {{ item.job }}</p>
-                    <p><span class="font-bold">Street: </span> {{ item.street }}, {{ item.country }}</p>
-                </div>
-            </div>
-        </template>
-    </Modal>
+  <Modal
+    v-show="isModalVisible"
+    @close="closeModal"
+    v-for="(item, index) in dataModal" :key=index
+    >
+    <template v-slot:body>
+      <div class="flex flex-col gap-3">
+        <div class="flex items-center gap-8">
+          <img :src=item.profile_picture :alt=item.first_name class="w-[150px] h-[150px] rounded-full">
+          <div>
+            <p>{{ item.first_name }} {{ item.last_name }}</p>
+            <p>{{ item.email }}</p>
+            <p>{{ item.phone }}</p>
+          </div>
+        </div>
+        <div>
+          <p><span class="font-bold">Gender: </span> {{ item.gender }}</p>
+          <p><span class="font-bold">Job: </span> {{ item.job }}</p>
+          <p><span class="font-bold">Street: </span> {{ item.street }}, {{ item.country }}</p>
+        </div>
+      </div>
+    </template>
+  </Modal>
   <div class="text-lg font-bold text-black text-left mb-4">User List</div>
   <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-gray-500 dark:text-gray-400">
       <thead class="text-gray-700 bg-[#fafbfc]">
-        <tr>
+        <tr class="text-left">
           <th class="p-4">ID</th>
           <th class="p-4">User</th>
           <th class="p-4">Date Of Birth</th>

@@ -1,5 +1,4 @@
 <script setup>
-import { ref } from "vue"
 import SideBar from './components/SideBar.vue';
 import Navbar from './components/Navbar.vue';
 </script>
